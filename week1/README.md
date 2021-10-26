@@ -2,7 +2,7 @@
 
 Enable k8s cluster in Docker Desktop:
 
-![image-20211025195234492](/Users/kvoskresenska/Library/Application Support/typora-user-images/image-20211025195234492.png)
+![image](https://user-images.githubusercontent.com/47593198/138922436-9472c8b9-9ca5-42f0-9ade-4e52465ebbd2.png)
 
 Deploy k8s dashboard:
 
@@ -32,7 +32,7 @@ Retrieve access token:
 $ kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"
 ```
 
-![image-20211025203545204](/Users/kvoskresenska/Library/Application Support/typora-user-images/image-20211025203545204.png)
+![image](https://user-images.githubusercontent.com/47593198/138922586-5284abc2-5683-4ef3-beb7-df5d36b93dda.png)
 
 Dowload and install Istio:
 
@@ -45,7 +45,7 @@ $ export PATH=$PWD/bin:$PATH
 $ istioctl install --set profile=demo -y
 ```
 
-![image-20211025205914976](/Users/kvoskresenska/Library/Application Support/typora-user-images/image-20211025205914976.png)
+![image](https://user-images.githubusercontent.com/47593198/138922663-09416965-a245-4a2a-be5a-31c190eac089.png)
 
 ```bash
 $ kubectl label namespace default istio-injection=enabled
@@ -57,7 +57,7 @@ $ kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
 $ istioctl analyze
 ```
 
-<img src="/Users/kvoskresenska/Library/Application Support/typora-user-images/image-20211026112404941.png" alt="image-20211026112404941" style="zoom:60%;" />
+![image](https://user-images.githubusercontent.com/47593198/138922763-4dfd5c1d-4372-4114-bbe1-2f0206de2993.png)
 
 Execute the following command to determine if your Kubernetes cluster is running in an environment that supports external load balancers:
 
@@ -65,7 +65,7 @@ Execute the following command to determine if your Kubernetes cluster is running
 $ kubectl get svc istio-ingressgateway -n istio-system
 ```
 
-![image-20211026112614566](/Users/kvoskresenska/Library/Application Support/typora-user-images/image-20211026112614566.png)
+![image](https://user-images.githubusercontent.com/47593198/138922870-92486947-18f7-45b2-a5aa-f498551c82e3.png)
 
 ```bash
 $ export INGRESS_HOST=127.0.0.1
@@ -75,7 +75,7 @@ $ echo "$GATEWAY_URL"
 $ echo "http://$GATEWAY_URL/productpage"
 ```
 
-![image-20211026185300998](/Users/kvoskresenska/Library/Application Support/typora-user-images/image-20211026185300998.png)
+![image](https://user-images.githubusercontent.com/47593198/138923007-db311004-e10a-428c-9c26-de2841357778.png)
 
 Install Kiali and the other addons and wait for them to be deployed.
 
@@ -85,7 +85,7 @@ $ kubectl rollout status deployment/kiali -n istio-system
 $ kubectl get po -n istio-system
 ```
 
-![image-20211026190510064](/Users/kvoskresenska/Library/Application Support/typora-user-images/image-20211026190510064.png)
+![image](https://user-images.githubusercontent.com/47593198/138923062-ec7ae90f-1bc3-43b6-abac-1ac3bf17645f.png)
 
 Access the Kiali dashboard.
 
@@ -93,7 +93,7 @@ Access the Kiali dashboard.
 $ istioctl dashboard kiali
 ```
 
-![image-20211026190806618](/Users/kvoskresenska/Library/Application Support/typora-user-images/image-20211026190806618.png)
+![image](https://user-images.githubusercontent.com/47593198/138923120-952c0e3d-f767-43c8-b9d6-a079bf3dc325.png)
 
 To see trace data, you must send requests to your service. The number of requests depends on Istio’s sampling rate. You set this rate when you install Istio. The default sampling rate is 1%. You need to send at least 100 requests before the first trace is visible. To send a 100 requests to the `productpage` service, use the following command:
 
