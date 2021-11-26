@@ -68,3 +68,10 @@ curl http://books:8080/api/v1/books -H "developer: Katyu"
 ```
 ![image](images/curl_with_header.png)
 ![image](images/feature_flag.png)
+
+#### Load Balancing
+Create destination rules for authors and books with load balancer and circuit breaker
+```bash
+kubectl apply -f k8s/gateway/lb.yml  
+```
+![image](images/lb.png)
