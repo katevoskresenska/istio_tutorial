@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: authors
+  namespace: istio-course
+spec:
+  hosts:
+    - authors
+  http:
+  - fault:
+      delay:
+        fixedDelay: 40s
+        percentage:
+          value: 100
+    route:
+    - destination:
+        host: authors
+        subset: v1
+      weight: 50
+    - destination:
+        host: authors
+        subset: v2
+      weight: 50
