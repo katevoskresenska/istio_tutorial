@@ -1,0 +1,35 @@
+# Enable mutual TLS per namespace
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: istio-course
+spec:
+  mtls:
+    mode: STRICT
+---
+apiVersion: security.istio.io/v1beta1
+kind: RequestAuthentication
+metadata:
+  name: auth0
+  namespace: istio-course
+spec:
+  jwtRules:
+  - issuer: https://auth0.com
+    jwksUri: https://auth0.com/.well-known/jwks.json
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: auth0
+  namespace: istio-course
+spec:
+  selector:
+    matchLabels:
+      app: authors
+      version: v1
+  action: DENY
+  rules:
+    - from:
+        - source:
+            notRequestPrincipals: ["*"]
